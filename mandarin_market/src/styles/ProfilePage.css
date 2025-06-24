@@ -1,0 +1,23 @@
+.profile-page-container {
+  min-height: 100vh; /* 최소 높이를 화면 전체 높이로 설정하여 공백이 보이지 않게 합니다. */
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-page-main {
+  flex-grow: 1; /* 헤더와 푸터를 제외한 모든 공간을 차지하도록 합니다. */
+  /* 푸터(60px)에 내용이 가려지지 않도록 하단에 여백을 줍니다. */
+  padding-bottom: 60px;
+}
+
+.profile-main-content {
+  max-width: 390px;
+  margin: 0 auto;
+  background-color: var(--background-color);
+}
+
+.loading-indicator {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-color-gray);
+}
