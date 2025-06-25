@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login_join.css">
+</head>
+<body>
+    <section class="profile-settings">
+        <h3>프로필 설정</h3>
+        <p>나중에 언제든지 변경할 수 있습니다.</p>
+        <div class="profile-settings-img">
+            <img src="../assets/basic-profile-img.png" alt="">
+        </div>
+
+        <div class="input-area">
+            <form action="">
+                <div class="input-container">
+                    <label for="profile-username">사용자 이름</label>
+                    <input type="text" id="profile-username" placeholder="2~10자 이내여야 합니다">
+                    <label for="profile-id">계정 ID</label>
+                    <input type="text" id="profile-id" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.">
+
+                    <div id="format-error" class="error-message" > *영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</div>
+                    <div id="duplicate-error" class="error-message" > *이미 사용 중인 ID입니다.</div>
+
+                    <label for="introduction">소개</label>
+                    <input type="text" id="introduction" placeholder="자신과 판매할 상품에 대해 소개해 주세요!">
+                </div>
+
+                <button class="L-button">감귤마켓 시작하기</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

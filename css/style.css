@@ -1,0 +1,67 @@
+@import "./reset.css";
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
+    clip: rect(0 0 0 0);
+}
+:root {
+    /* Primary Colors */
+    --primary-color: #F26E22;
+    --primary-light: #FFC7A7;
+    
+    /* Text Colors */
+    --text-primary: #000000;
+    --text-secondary: #767676;
+    --text-tertiary: #DBDBDB;
+    --text-muted: #C4C4C4;
+    --error-color: #EB5757;
+
+    /* Background Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #EA7F42;
+    --bg-tertiary:#F2F2F2;
+}
+
+section{
+    width: 100%;
+    min-width: 390px;
+    max-width: 767px;
+    height: 844px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    width: 100%;
+    height: 48px;
+    background-color:var(--bg-primary);
+    border-bottom: 0.5px solid var(--text-tertiary);
+    flex-shrink: 0; /* 크기 고정 */
+}
+
+main{
+    width: 100%;
+    flex: 1; /* 남은 공간 모두 차지 */
+    overflow-y: auto; /* 스크롤 가능 */
+    
+}
+main::-webkit-scrollbar{
+    display: none;
+}
+
+footer{
+    width: 100%;
+    height: 60px;
+    background-color: var(--bg-primary);
+    border-top: 0.5px solid var(--text-tertiary);
+    flex-shrink: 0; /* 크기 고정 */
+}

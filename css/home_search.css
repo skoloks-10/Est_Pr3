@@ -1,0 +1,261 @@
+/* home_none 페이지 */
+.top-main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.top-main-nav p{
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 13px 0 13px 16px;
+}
+.top-main-nav img{
+    width: 24px;
+    height: 24px;
+    margin:12px 16px;
+}
+
+.home-none-main-content img{
+    width: 100px;
+    height: 100px;
+    margin: 220px auto 0;
+    display: block;
+}
+.home-none-main-content p{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 20px auto 0;
+}
+
+.ML-button{
+    display: block;
+    width: 120px;
+    height: 44px;
+    background-color:var(--primary-color);
+    border-radius: 44px;
+    color: var(--bg-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.tab-menu-nav{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.tab-menu-nav ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around; /* 4개 아이템 균등 배치 */
+    align-items: center;
+}
+
+.tab-menu-nav li {
+    flex: 1; /* 각 li가 동일한 너비 차지 */
+    display: flex;
+    justify-content: center;
+}
+
+.tab-menu-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-menu-nav img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.tab-menu-nav p {
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* home_feed페이지 */
+.home-post,
+.home-post-onlytext {
+    display: flex;
+    margin: 20px 16px 0 16px;
+    width: calc(100% - 40px);
+    min-width: 358px;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+.home-post-profile {
+    flex-shrink: 0;
+}
+
+.home-post-profile img {
+    width: 42px;
+    height: 42px;
+    margin: 0 12px 0 0; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.home-post-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    margin: 4px 0 0 0;
+}
+
+.prorile-addr {
+    font-size: 12px;
+    font-weight: 400;
+    color:  var(--text-secondary);
+    margin: 2px 0 0 0;
+}
+
+.home-post-content-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 16px 0;
+}
+
+.home-post-content a img {
+    width: 100%;
+    min-width: 304px;
+    min-height: 228px;
+    border-radius: 10px;
+    border-radius: 0.5px solid var(--text-tertiary);
+    margin-bottom: 12px;
+    object-fit: cover;
+    display: block;
+}
+
+.home-post-content-icon {
+    display: flex;
+    margin: 0 0 16px 0;
+}
+
+.home-post-content-icon li {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+}
+
+
+.home-post-content-icon img {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+}
+
+.home-post-content-icon p {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* 날짜 */
+.home-post-content-date {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* search 페이지 */
+.top-search-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.top-search-nav img{
+    width: 24px;
+    height: 24px;
+    margin:12px 0 12px 16px;
+}
+.top-search-nav input{
+    display: block;
+    width: 100%;
+    min-width: 316px;
+    height: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    border: none; 
+    border-radius: 32px;
+    background-color: var(--bg-tertiary);
+    outline: none;
+    padding: 7px 0 7px 16px;
+    margin: 8px 16px 8px 20px;
+    color: var(--text-primary);
+    
+}
+.top-search-nav input::placeholder{
+    color: var(--text-muted);
+}
+
+.user-search-container{
+    overflow: hidden;
+    
+} 
+.user-search-container a {
+    width: 100%;
+    min-width: 358px;
+    height: 50px;
+    margin: 16px 16px 0px 16px;
+    display: flex;
+}
+.user-search-container img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.user-search-info{
+    display: flex;
+    flex-direction:column;
+    flex:1;
+}
+.user-search-name{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 5px auto 0 0;
+}
+.user-search-addr{
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 6px auto 0 0;
+}
+
+/* page-404 페이지 */
+.page-404 img{
+    width: 158px;
+    height: 158px;
+    margin:200px auto 0;
+    display: block;
+}
+.page-404 p{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 30px auto 0;
+}
