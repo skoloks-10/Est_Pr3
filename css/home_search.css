@@ -109,6 +109,7 @@
 .home-post-content {
     flex: 1;
     min-width: 0;
+    position: relative;
 }
 
 .profile-name {
@@ -119,7 +120,7 @@
     margin: 4px 0 0 0;
 }
 
-.prorile-addr {
+.profile-addr {
     font-size: 12px;
     font-weight: 400;
     color:  var(--text-secondary);
@@ -132,8 +133,15 @@
     color: var(--text-primary);
     margin: 16px 0;
 }
+.more-vertical{
+    position:absolute;
+    top: 4px;
+    right: 0;
+    width: 18px;
+    height: 18px;
+}
 
-.home-post-content a img {
+.home-post-content-img{
     width: 100%;
     min-width: 304px;
     min-height: 228px;
