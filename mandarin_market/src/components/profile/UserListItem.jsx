@@ -16,7 +16,7 @@ const UserListItem = ({ user, onFollowToggle }) => {
 
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/profile/${user.accountname}/${action}`,
+        `https://dev.wenivops.co.kr/services/mandarin/profile/${user.accountname}/${action}`,
         {
           method: method,
           headers: {

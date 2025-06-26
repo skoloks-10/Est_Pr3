@@ -1,6 +1,6 @@
 import defaultImage from "../assets/images/basic-profile.png";
 
-const IMAGE_BASE_URL = "https://estapi.mandarin.weniv.co.kr/";
+const IMAGE_BASE_URL = "https://dev.wenivops.co.kr/services/mandarin";
 
 /**
  * 파일 이름을 완전한 이미지 URL로 변환합니다.

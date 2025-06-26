@@ -24,7 +24,7 @@ const EmailSignupPage = () => {
     // 2. 이메일 중복 검사 API 호출
     try {
       const response = await fetch(
-        "https://estapi.mandarin.weniv.co.kr/user/emailvalid",
+        "https://dev.wenivops.co.kr/services/mandarin/user/emailvalid",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

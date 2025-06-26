@@ -29,7 +29,7 @@ const HomePage = () => {
 
     try {
       const response = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/feed?limit=${POST_LIMIT}&skip=${skip}`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/feed?limit=${POST_LIMIT}&skip=${skip}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

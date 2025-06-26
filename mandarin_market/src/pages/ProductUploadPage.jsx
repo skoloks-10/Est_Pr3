@@ -56,7 +56,7 @@ const ProductUploadPage = () => {
     let imageUrl = "";
     try {
       const imgRes = await fetch(
-        "https://estapi.mandarin.weniv.co.kr/image/uploadfile",
+        "https://dev.wenivops.co.kr/services/mandarin/image/uploadfile",
         {
           method: "POST",
           body: formData,
@@ -84,7 +84,7 @@ const ProductUploadPage = () => {
     try {
       // API 명세에 따라 POST /product 요청 전송
       const productRes = await fetch(
-        "https://estapi.mandarin.weniv.co.kr/product",
+        "https://dev.wenivops.co.kr/services/mandarin/product",
         {
           method: "POST",
           headers: {

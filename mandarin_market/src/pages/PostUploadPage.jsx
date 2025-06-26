@@ -78,7 +78,7 @@ const PostUploadPage = () => {
 
       try {
         const res = await fetch(
-          "https://estapi.mandarin.weniv.co.kr/image/uploadfiles",
+          "https://dev.wenivops.co.kr/services/mandarin/image/uploadfiles",
           {
             method: "POST",
             body: formData,
@@ -104,14 +104,17 @@ const PostUploadPage = () => {
     };
 
     try {
-      const res = await fetch("https://estapi.mandarin.weniv.co.kr/post", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
+      const res = await fetch(
+        "https://dev.wenivops.co.kr/services/mandarin/post",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
       const data = await res.json();
       if (data.post) {
         navigate(`/profile/${user.accountname}`);

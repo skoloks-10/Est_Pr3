@@ -25,7 +25,6 @@ const ProductList = ({ products = [] }) => {
 
           return (
             <article key={product.id} className="product-item">
-              {/* 상품 판매 링크(product.link)로 이동하는 a 태그 */}
               <a
                 href={product.link}
                 target="_blank"

@@ -20,7 +20,7 @@ const SplashScreen = () => {
       // 2. 토큰이 있는 경우, 서버에 유효성 검증 요청
       try {
         const res = await fetch(
-          "https://estapi.mandarin.weniv.co.kr/user/checktoken",
+          "https://dev.wenivops.co.kr/services/mandarin/user/checktoken",
           {
             method: "GET",
             headers: {

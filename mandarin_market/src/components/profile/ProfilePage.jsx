@@ -32,7 +32,7 @@ const ProfilePage = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/${accountname}/userpost?limit=${POST_LIMIT}&skip=${skip}`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${accountname}/userpost?limit=${POST_LIMIT}&skip=${skip}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = await res.json();
@@ -71,12 +71,18 @@ const ProfilePage = () => {
       try {
         // 프로필 정보와 상품 정보를 동시에 요청
         const [profileRes, productRes] = await Promise.all([
-          fetch(`https://estapi.mandarin.weniv.co.kr/profile/${accountname}`, {
-            headers,
-          }),
-          fetch(`https://estapi.mandarin.weniv.co.kr/product/${accountname}`, {
-            headers,
-          }),
+          fetch(
+            `https://dev.wenivops.co.kr/services/mandarin/profile/${accountname}`,
+            {
+              headers,
+            }
+          ),
+          fetch(
+            `https://dev.wenivops.co.kr/services/mandarin/product/${accountname}`,
+            {
+              headers,
+            }
+          ),
         ]);
 
         const profileData = await profileRes.json();
@@ -86,13 +92,9 @@ const ProfilePage = () => {
         setProducts(productData.product || []);
 
         // 프로필, 상품 로딩 후 첫 페이지 게시물 로딩 시작
-        // fetchPosts를 직접 호출하는 대신, 초기 상태를 설정하여 첫 로드를 유도할 수 있습니다.
-        // 여기서는 명시적으로 호출합니다.
         if (profileData.profile) {
-          // 첫 게시물 로드를 위해 임시로 상태를 조작하여 fetchPosts를 호출합니다.
-          // 더 나은 방법은 별도의 초기 로드 함수를 사용하는 것이지만, 여기서는 간결함을 위해 이렇게 처리합니다.
           const initialPostRes = await fetch(
-            `https://estapi.mandarin.weniv.co.kr/post/${accountname}/userpost?limit=${POST_LIMIT}&skip=0`,
+            `https://dev.wenivops.co.kr/services/mandarin/post/${accountname}/userpost?limit=${POST_LIMIT}&skip=0`,
             { headers }
           );
           const initialPostData = await initialPostRes.json();

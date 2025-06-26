@@ -44,8 +44,9 @@ const EmailLoginPage = () => {
     };
 
     try {
+      console.log("API 요청 시작:", loginData);
       const response = await fetch(
-        "https://estapi.mandarin.weniv.co.kr/user/login",
+        "https://dev.wenivops.co.kr/services/mandarin/user/login",
         {
           method: "POST",
           headers: {
@@ -55,11 +56,13 @@ const EmailLoginPage = () => {
         }
       );
 
+      console.log("응답 상태:", response.status, response.statusText);
       const data = await response.json();
+      console.log("서버 응답 데이터:", data);
 
-      if (response.ok && data.user) {
-        localStorage.setItem("token", data.user.token);
-        localStorage.setItem("accountname", data.user.accountname);
+      if (response.ok && data) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("accountname", data.accountname);
         navigate("/home");
       } else {
         setErrorMessage(data.message || "로그인에 실패했습니다.");

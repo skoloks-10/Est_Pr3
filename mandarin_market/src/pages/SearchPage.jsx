@@ -25,9 +25,11 @@ const SearchPage = () => {
   const searchUsers = async (searchKeyword) => {
     const token = localStorage.getItem("token");
     try {
-      // 🔴 API 주소 오타 수정: 'estapi' -> 'api'
+      // encodeURIComponent()를 적용하여 한글과 특수문자를 안전하게 인코딩
+      const encodedKeyword = encodeURIComponent(searchKeyword);
+
       const response = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/user/searchuser/?keyword=${searchKeyword}`,
+        `https://dev.wenivops.co.kr/services/mandarin/user/searchuser/?keyword=${encodedKeyword}`,
         {
           method: "GET",
           headers: {

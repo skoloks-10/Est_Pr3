@@ -15,7 +15,6 @@ const Alert = ({ message, onClose, onConfirm }) => {
       <div className="alert-content">
         <p className="alert-message">{message}</p>
         <div className="alert-buttons">
-          {/* onConfirm prop의 유무에 따라 다른 버튼을 보여줍니다. */}
           {onConfirm ? (
             // onConfirm이 있으면 '취소'와 '확인' 버튼을 모두 표시
             <>

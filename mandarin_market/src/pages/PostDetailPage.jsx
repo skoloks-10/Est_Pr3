@@ -46,7 +46,7 @@ const PostDetailPage = () => {
       setIsCommentsLoading(true);
       try {
         const res = await fetch(
-          `https://estapi.mandarin.weniv.co.kr/post/${postId}/comments/?limit=${COMMENT_LIMIT}&skip=${skip}`,
+          `https://dev.wenivops.co.kr/services/mandarin/post/${postId}/comments/?limit=${COMMENT_LIMIT}&skip=${skip}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -75,7 +75,7 @@ const PostDetailPage = () => {
       setIsLoading(true);
       try {
         const postRes = await fetch(
-          `https://estapi.mandarin.weniv.co.kr/post/${postId}`,
+          `https://dev.wenivops.co.kr/services/mandarin/post/${postId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -115,7 +115,7 @@ const PostDetailPage = () => {
     if (!newComment.trim()) return;
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/${postId}/comments`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}/comments`,
         {
           method: "POST",
           headers: {
@@ -143,7 +143,7 @@ const PostDetailPage = () => {
     if (!selectedComment) return;
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/${postId}/comments/${selectedComment.id}`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}/comments/${selectedComment.id}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -171,7 +171,7 @@ const PostDetailPage = () => {
     if (!selectedComment) return;
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/${postId}/comments/${selectedComment.id}/report`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}/comments/${selectedComment.id}/report`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -196,7 +196,7 @@ const PostDetailPage = () => {
   const deletePost = async () => {
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/${postId}`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -218,7 +218,7 @@ const PostDetailPage = () => {
   const reportPost = async () => {
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/post/${postId}/report`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}/report`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

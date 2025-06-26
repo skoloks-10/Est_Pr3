@@ -8,7 +8,8 @@ const ProfileSetupPage = () => {
   const location = useLocation();
   const { email, password } = location.state || {};
 
-  const defaultImageUrl = "https://estapi.mandarin.weniv.co.kr/Ellipse.png";
+  const defaultImageUrl =
+    "https://dev.wenivops.co.kr/services/mandarin/Ellipse.png";
   const [image, setImage] = useState(defaultImageUrl);
   const [imageFile, setImageFile] = useState(null);
 
@@ -49,7 +50,7 @@ const ProfileSetupPage = () => {
 
     try {
       const res = await fetch(
-        "https://estapi.mandarin.weniv.co.kr/user/accountnamevalid",
+        "https://dev.wenivops.co.kr/services/mandarin/user/accountnamevalid",
         {
           method: "POST", // 요청 메소드
           headers: { "Content-Type": "application/json" }, // 헤더
@@ -100,7 +101,7 @@ const ProfileSetupPage = () => {
         // 3. API 호출 (URL, Method 일치)
         // Content-Type 헤더는 FormData를 body로 사용할 때 브라우저가 자동으로 설정하므로, 수동으로 추가하지 않는 것이 올바른 방법입니다.
         const imgRes = await fetch(
-          "https://estapi.mandarin.weniv.co.kr//image/uploadfile",
+          "https://dev.wenivops.co.kr/services/mandarin/image/uploadfile",
           {
             method: "POST",
             body: formData,
@@ -110,7 +111,7 @@ const ProfileSetupPage = () => {
         // 4. 성공 응답(Res)에서 'filename'을 사용하여 이미지 URL 생성
         if (imgData.filename) {
           finalImageUrl =
-            "https://estapi.mandarin.weniv.co.kr/" + imgData.filename;
+            "https://dev.wenivops.co.kr/services/mandarin/" + imgData.filename;
         } else {
           // ... (업로드 실패 시 예외 처리) ...
         }
@@ -136,11 +137,14 @@ const ProfileSetupPage = () => {
 
     try {
       // 3. API 호출: 명세에 맞는 URL, 메소드, 헤더, 본문을 사용하여 서버에 요청합니다.
-      const res = await fetch("https://estapi.mandarin.weniv.co.kr/user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
+      const res = await fetch(
+        "https://dev.wenivops.co.kr/services/mandarin/user",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
       const data = await res.json();
       if (data.user) {
         alert("회원가입이 완료되었습니다. 로그인 해주세요.");

@@ -25,7 +25,7 @@ const ProfileInfo = ({ profile, isMyProfile, onFollowChange }) => {
 
     try {
       const res = await fetch(
-        `https://estapi.mandarin.weniv.co.kr/profile/${profile.accountname}/${action}`,
+        `https://dev.wenivops.co.kr/services/mandarin/profile/${profile.accountname}/${action}`,
         {
           method: method,
           headers: {
@@ -73,7 +73,6 @@ const ProfileInfo = ({ profile, isMyProfile, onFollowChange }) => {
           <span>followers</span>
         </Link>
 
-        {/* ▼▼▼ 핵심 수정 부분 ▼▼▼ */}
         <img
           // 3. generateImageUrl 함수를 사용하여 올바른 이미지 주소를 생성합니다.
           src={generateImageUrl(profile.image)}

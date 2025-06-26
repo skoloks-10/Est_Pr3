@@ -30,7 +30,7 @@ const ProfileEditPage = () => {
       }
       try {
         const res = await fetch(
-          `https://estapi.mandarin.weniv.co.kr/profile/${myAccountname}`,
+          `https://dev.wenivops.co.kr/services/mandarin/profile/${myAccountname}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -85,7 +85,7 @@ const ProfileEditPage = () => {
       formData.append("image", imageFile);
       try {
         const res = await fetch(
-          "https://estapi.mandarin.weniv.co.kr/image/uploadfile",
+          "https://dev.wenivops.co.kr/services/mandarin/image/uploadfile",
           {
             method: "POST",
             body: formData,
@@ -110,14 +110,17 @@ const ProfileEditPage = () => {
     };
 
     try {
-      const res = await fetch("https://estapi.mandarin.weniv.co.kr/user", {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(profileData),
-      });
+      const res = await fetch(
+        "https://dev.wenivops.co.kr/services/mandarin/user",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(profileData),
+        }
+      );
       const data = await res.json();
 
       if (data.user) {

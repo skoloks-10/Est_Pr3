@@ -177,7 +177,6 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
                           @ {post.author.accountname}
                         </p>
                       </div>
-                      {/* 이 부분을 Link 컴포넌트로 수정하여 클릭 시 상세 페이지로 이동시킵니다. */}
                       <button
                         className="post-more-button"
                         onClick={() => openModal(post)}
@@ -191,7 +190,6 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
                         <p>{post.content}</p>
                       </Link>
 
-                      {/* ▼▼▼ 핵심 구현 부분 ▼▼▼ */}
                       {post.image &&
                         // 1. post.image에 쉼표가 있는지 확인하여 여러 이미지인지 판단
                         (post.image.includes(",") ? (
@@ -224,7 +222,6 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
                         <img src={heartIcon} alt="좋아요" />
                         <span>{post.heartCount}</span>
                       </button>
-                      {/* 이 부분을 Link 컴포넌트로 수정하여 클릭 시 상세 페이지로 이동시킵니다. */}
                       <Link to={`/post/${post.id}`} className="comment-link">
                         <img src={commentIcon} alt="댓글" />
                         <span>{post.commentCount}</span>
@@ -265,7 +262,6 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
         {posts.length === 0 && <p className="no-posts">게시물이 없습니다.</p>}
       </section>
 
-      {/* Modal 컴포넌트 대신 직접 구현 */}
       {modalState.isModalOpen && (
         <div className="modal-backdrop" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -281,7 +277,6 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
         </div>
       )}
 
-      {/* Alert 컴포넌트 대신 직접 구현 */}
       {modalState.isAlertOpen && (
         <div className="alert-backdrop">
           <div className="alert-content">

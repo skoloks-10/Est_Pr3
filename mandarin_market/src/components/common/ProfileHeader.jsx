@@ -36,7 +36,6 @@ const ProfileHeader = () => {
         </button>
       </header>
 
-      {/* Modal 컴포넌트 대신 직접 구현 */}
       {isModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -52,7 +51,6 @@ const ProfileHeader = () => {
         </div>
       )}
 
-      {/* Alert 컴포넌트 대신 직접 구현 */}
       {isAlertOpen && (
         <div className="alert-backdrop">
           <div className="alert-content">

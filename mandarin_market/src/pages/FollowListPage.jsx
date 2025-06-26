@@ -30,7 +30,7 @@ const FollowListPage = () => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `https://estapi.mandarin.weniv.co.kr/profile/${accountname}/${listType}`,
+          `https://dev.wenivops.co.kr/services/mandarin/profile/${accountname}/${listType}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
