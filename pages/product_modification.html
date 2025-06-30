@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile_product_modification.css">
+</head>
+<body>
+    <section class="product-modification">
+
+        <header>
+            <nav class="top-upload-nav">
+                <a href="#">
+                    <img src="../assets/icon/icon-arrow-left.png" alt="">
+                </a>
+                <button class="MS-button">저장</button>
+            </nav>
+        </header>
+        <main>
+
+            <div class="input-area">
+                <form action="">
+                    <div class="input-container">
+                        <label for="product-input-img">이미지 등록</label>
+                        <div class="product-input-img-container">
+                        <button class="upload-button" id="uploadBtn"></button>
+                        <input type="file" id="product-input-img" accept="image/*"></div>
+                        
+                        
+                        <label for="product-name">상품명</label>
+                        <input type="text" id="product-name" placeholder="2~15자 이내여야 합니다.">
+                        <label for="product-price">가격</label>
+                        <input type="text" id="product-price" placeholder="숫자만 입력 가능합니다.">
+
+                        <label for="product-link">판매 링크</label>
+                        <input type="text" id="product-link" placeholder="URL을 입력해 주세요.">
+                    </div>
+                </form>
+            </div>
+        </main>
+
+    </section>
+</body>
+</html>
