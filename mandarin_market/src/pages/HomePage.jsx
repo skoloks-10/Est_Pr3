@@ -78,9 +78,6 @@ const HomePage = () => {
     setFeed([]);
     setSkip(0);
     setHasMore(true);
-    // fetchFeed 함수를 직접 호출하지 않고, 상태 초기화 후 첫 로드를 유도
-    // 이 부분은 fetchFeed의 의존성 배열 변경에 따라 조정될 수 있습니다.
-    // 가장 간단한 방법은 별도의 초기 로드 함수를 두는 것이나, 여기서는 간소화합니다.
     // 초기 로드를 위해 즉시 실행
     (async () => {
       await fetchFeed();

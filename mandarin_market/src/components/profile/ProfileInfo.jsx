@@ -42,12 +42,12 @@ const ProfileInfo = ({ profile, isMyProfile, onFollowChange }) => {
 
       if (data.profile) {
         // API 응답을 기반으로 팔로우 상태와 팔로워 수 업데이트
-        setIsFollowing(data.profile.isfollow);
+        setIsFollowing(!isFollowing);
         setFollowerCount(data.profile.followerCount);
 
         // 팔로우 상태 변경을 부모 컴포넌트에 알림
         if (onFollowChange) {
-          onFollowChange(data.profile.isfollow);
+          onFollowChange(!isFollowing);
         }
       }
     } catch (error) {

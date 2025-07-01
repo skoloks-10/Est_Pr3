@@ -76,6 +76,7 @@ const PostUploadPage = () => {
         formData.append("image", image);
       });
 
+      // 이미지 업로드 로직 부분 수정
       try {
         const res = await fetch(
           "https://dev.wenivops.co.kr/services/mandarin/image/uploadfiles",
@@ -85,9 +86,20 @@ const PostUploadPage = () => {
           }
         );
         const data = await res.json();
-        // 여러 파일 업로드 시 파일 이름이 콤마로 구분된 문자열로 올 경우를 처리
-        // 만약 배열로 온다면 data.map(item => item.filename).join(',') 등으로 처리 필요
-        uploadedImageNames = data.map((item) => item.filename).join(",");
+        console.log("이미지 업로드 응답:", data); // 응답 구조 확인용
+
+        // 단일 이미지와 다중 이미지를 모두 처리
+        if (Array.isArray(data)) {
+          // 여러 이미지일 경우 (배열)
+          uploadedImageNames = data.map((item) => item.filename).join(",");
+        } else if (data && typeof data === "object" && data.filename) {
+          // 단일 이미지일 경우 (객체)
+          uploadedImageNames = data.filename;
+        } else {
+          console.error("알 수 없는 응답 형식:", data);
+          alert("이미지 업로드 응답 형식이 올바르지 않습니다.");
+          return;
+        }
       } catch (error) {
         console.error("이미지 업로드 실패:", error);
         alert("이미지 업로드에 실패했습니다.");

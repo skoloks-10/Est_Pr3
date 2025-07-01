@@ -51,34 +51,56 @@ const ProductUploadPage = () => {
     if (!isFormValid) return;
 
     // Step 1: 이미지 업로드
-    const formData = new FormData();
-    formData.append("image", imageFile);
-    let imageUrl = "";
-    try {
-      const imgRes = await fetch(
-        "https://dev.wenivops.co.kr/services/mandarin/image/uploadfile",
-        {
-          method: "POST",
-          body: formData,
+    let uploadedFileName = ""; // 파일 이름만 저장할 변수
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      try {
+        const imgRes = await fetch(
+          "https://dev.wenivops.co.kr/services/mandarin/image/uploadfile",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        const imgData = await imgRes.json();
+        if (imgData.filename) {
+          // 🚨 중요: 전체 URL이 아닌, 응답받은 'filename'만 저장합니다.
+          uploadedFileName = imgData.filename;
+        } else {
+          alert("이미지 업로드에 실패했습니다.");
+          return;
         }
-      );
-      const imgData = await imgRes.json();
-      imageUrl = imgData.filename;
-    } catch (error) {
-      console.error("이미지 업로드 실패:", error);
-      alert("이미지 업로드에 실패했습니다. 다시 시도해주세요.");
-      return;
+      } catch (error) {
+        console.error("이미지 업로드 실패:", error);
+        return;
+      }
+    }
+
+    // URL 형식 검증 및 접두어 추가
+    let formattedLink = saleLink;
+    if (
+      saleLink &&
+      !saleLink.startsWith("http://") &&
+      !saleLink.startsWith("https://")
+    ) {
+      formattedLink = `https://${saleLink}`;
     }
 
     // Step 2: 상품 데이터 전송
     const productData = {
       product: {
         itemName: productName,
-        price: parseInt(price.replace(/,/g, ""), 10), // 숫자로 변환
-        link: saleLink,
-        itemImage: imageUrl,
+        price: parseInt(price.replace(/,/g, ""), 10),
+        link: formattedLink,
+        // 🚨 중요: 가공되지 않은 파일 이름을 전송합니다.
+        itemImage: uploadedFileName,
       },
     };
+
+    // 디버깅용 - 서버에 전송하는 데이터 확인
+    console.log("서버에 전송할 데이터:", productData);
 
     const token = localStorage.getItem("token");
     try {
@@ -94,10 +116,20 @@ const ProductUploadPage = () => {
           body: JSON.stringify(productData),
         }
       );
+
+      // 에러 응답 상세 정보 확인
+      if (!productRes.ok) {
+        const errorText = await productRes.text();
+        console.error("서버 응답:", errorText);
+        throw new Error(
+          `상품 등록 실패: ${productRes.status} ${productRes.statusText}`
+        );
+      }
+
       const productResult = await productRes.json();
 
       // 3. API 응답 처리
-      if (productRes.ok && productResult.product) {
+      if (productResult.product) {
         // SUCCESS: 성공 시 프로필 페이지로 이동
         navigate(`/profile/${localStorage.getItem("accountname")}`);
       } else {

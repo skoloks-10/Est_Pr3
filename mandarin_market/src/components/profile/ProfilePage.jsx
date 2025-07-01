@@ -9,6 +9,7 @@ import "../../styles/ProfilePage.css";
 
 const ProfilePage = () => {
   const { accountname } = useParams();
+  const decodedAccountname = decodeURIComponent(accountname);
   const navigate = useNavigate();
 
   // 1. 상태 관리 세분화
@@ -22,7 +23,7 @@ const ProfilePage = () => {
   const POST_LIMIT = 10; // 한 번에 불러올 게시물 수
 
   const myAccountname = localStorage.getItem("accountname");
-  const isMyProfile = accountname === myAccountname;
+  const isMyProfile = decodedAccountname === myAccountname;
 
   // 2. 게시물만 불러오는 함수 (useCallback으로 최적화)
   const fetchPosts = useCallback(async () => {
@@ -32,7 +33,7 @@ const ProfilePage = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `https://dev.wenivops.co.kr/services/mandarin/post/${accountname}/userpost?limit=${POST_LIMIT}&skip=${skip}`,
+        `https://dev.wenivops.co.kr/services/mandarin/post/${decodedAccountname}/userpost?limit=${POST_LIMIT}&skip=${skip}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = await res.json();
@@ -48,7 +49,7 @@ const ProfilePage = () => {
     } finally {
       setIsPostsLoading(false);
     }
-  }, [accountname, isPostsLoading, hasMorePosts, skip]);
+  }, [decodedAccountname, isPostsLoading, hasMorePosts, skip]);
 
   // 3. 초기 데이터 로딩 (프로필, 상품, 첫 페이지 게시물)
   useEffect(() => {
@@ -72,13 +73,13 @@ const ProfilePage = () => {
         // 프로필 정보와 상품 정보를 동시에 요청
         const [profileRes, productRes] = await Promise.all([
           fetch(
-            `https://dev.wenivops.co.kr/services/mandarin/profile/${accountname}`,
+            `https://dev.wenivops.co.kr/services/mandarin/profile/${decodedAccountname}`,
             {
               headers,
             }
           ),
           fetch(
-            `https://dev.wenivops.co.kr/services/mandarin/product/${accountname}`,
+            `https://dev.wenivops.co.kr/services/mandarin/product/${decodedAccountname}`,
             {
               headers,
             }
@@ -94,7 +95,7 @@ const ProfilePage = () => {
         // 프로필, 상품 로딩 후 첫 페이지 게시물 로딩 시작
         if (profileData.profile) {
           const initialPostRes = await fetch(
-            `https://dev.wenivops.co.kr/services/mandarin/post/${accountname}/userpost?limit=${POST_LIMIT}&skip=0`,
+            `https://dev.wenivops.co.kr/services/mandarin/post/${decodedAccountname}/userpost?limit=${POST_LIMIT}&skip=0`,
             { headers }
           );
           const initialPostData = await initialPostRes.json();
@@ -113,7 +114,7 @@ const ProfilePage = () => {
     };
 
     fetchInitialData();
-  }, [accountname, navigate]); // accountname이 바뀔 때마다 모든 데이터를 새로 불러옵니다.
+  }, [decodedAccountname, navigate]); // accountname이 바뀔 때마다 모든 데이터를 새로 불러옵니다.
 
   // 4. 스크롤 이벤트 핸들러
   useEffect(() => {
@@ -129,10 +130,42 @@ const ProfilePage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchPosts]);
 
-  const handleFollowToggle = async () => {
-    // 팔로우/언팔로우 로직 (기존과 동일)
-    // ...
-  };
+  // 사용자 프로필 최신 정보 가져오기
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem("token");
+      // API에서 최신 사용자 정보 가져오기
+      const res = await fetch(
+        `https://dev.wenivops.co.kr/services/mandarin/profile/${decodedAccountname}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await res.json();
+      // 최신 팔로우 상태 포함된 사용자 정보 설정
+      setProfile(data.profile);
+    };
+
+    fetchUserProfile();
+  }, [decodedAccountname]); // 사용자가 바뀔 때마다 재실행
+
+  // 상품 데이터 가져오기 (예시 추가)
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `https://dev.wenivops.co.kr/services/mandarin/product/${decodedAccountname}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await res.json();
+      console.log("API에서 받은 상품 데이터:", data.product); // 이 부분을 확인!
+      setProducts(data.product);
+    };
+
+    fetchProducts();
+  }, [decodedAccountname]); // decodedAccountname이 바뀔 때마다 상품 데이터 재요청
 
   if (isPageLoading)
     return <div className="loading-indicator">프로필을 불러오는 중...</div>;
@@ -143,19 +176,24 @@ const ProfilePage = () => {
       <main className="profile-page-main">
         {profile && (
           <>
-            <ProfileInfo
-              profile={profile}
-              isMyProfile={isMyProfile}
-              isFollowing={profile.isfollow}
-              onFollowToggle={handleFollowToggle}
-            />
-            <ProductList products={products} />
-            <PostList posts={posts} />
-            {isPostsLoading && (
-              <div className="loading-indicator">
-                게시물을 더 불러오는 중...
-              </div>
+            <ProfileInfo profile={profile} isMyProfile={isMyProfile} />
+
+            {products && products.length > 0 && (
+              <section className="product-section">
+                <h2 className="section-title">판매 중인 상품</h2>
+                <ProductList products={products} />
+              </section>
             )}
+
+            {/* 게시물 목록 섹션 */}
+            <section className="post-section">
+              <PostList posts={posts} />
+              {isPostsLoading && (
+                <div className="loading-indicator">
+                  게시물을 더 불러오는 중...
+                </div>
+              )}
+            </section>
           </>
         )}
       </main>

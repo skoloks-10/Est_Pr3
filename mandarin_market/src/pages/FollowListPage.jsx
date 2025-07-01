@@ -50,7 +50,9 @@ const FollowListPage = () => {
         }
 
         const data = await res.json();
-        setUsers(data);
+        console.log("API 응답 데이터:", data); // API 응답 전체를 확인
+        // API 응답이 사용자 객체 배열 자체일 가능성이 높으므로, data를 직접 상태에 설정합니다.
+        setUsers(data || []);
       } catch (error) {
         console.error(`${pageTitle} 목록 로딩 실패:`, error);
         alert(error.message);
@@ -93,6 +95,7 @@ const FollowListPage = () => {
               key={user._id}
               user={user}
               onFollowToggle={handleFollowToggle}
+              listType={listType} // 이 부분 확인
             />
           ))
         ) : (

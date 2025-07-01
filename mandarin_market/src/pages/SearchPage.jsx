@@ -39,28 +39,60 @@ const SearchPage = () => {
         }
       );
       const data = await response.json();
-      setUsers(data);
+
+      // 응답 데이터 구조 디버깅
+      console.log("API 검색 응답 데이터:", data);
+
+      // 데이터가 배열인지 확인하고 적절히 처리
+      if (Array.isArray(data)) {
+        setUsers(data);
+      } else if (data && typeof data === "object") {
+        // API가 { users: [...] } 또는 다른 구조로 반환할 경우를 대비
+        // 객체에 users 키가 있는지 확인
+        if (data.users && Array.isArray(data.users)) {
+          setUsers(data.users);
+        } else {
+          console.error("예상치 못한 응답 형식:", data);
+          setUsers([]); // 빈 배열로 설정
+        }
+      } else {
+        setUsers([]); // 빈 배열로 설정
+      }
     } catch (error) {
       console.error("사용자 검색에 실패했습니다:", error);
+      setUsers([]); // 오류 시 빈 배열로 설정
     }
+  };
+
+  const escapeRegExp = (string) => {
+    // 정규표현식 특수 문자를 이스케이프 처리합니다
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   };
 
   const highlightKeyword = (text, keyword) => {
     if (!keyword) return text;
-    const parts = text.split(new RegExp(`(${keyword})`, "gi"));
-    return (
-      <>
-        {parts.map((part, index) =>
-          part.toLowerCase() === keyword.toLowerCase() ? (
-            <strong key={index} className="highlight">
-              {part}
-            </strong>
-          ) : (
-            part
-          )
-        )}
-      </>
-    );
+    try {
+      // 검색어를 정규식으로 사용하기 전에 특수 문자들을 이스케이프 처리
+      const escapedKeyword = escapeRegExp(keyword);
+      const parts = text.split(new RegExp(`(${escapedKeyword})`, "gi"));
+      return (
+        <>
+          {parts.map((part, index) =>
+            part.toLowerCase() === keyword.toLowerCase() ? (
+              <strong key={index} className="highlight">
+                {part}
+              </strong>
+            ) : (
+              part
+            )
+          )}
+        </>
+      );
+    } catch (error) {
+      console.error("키워드 강조 처리 중 오류:", error);
+      // 오류 발생시 원본 텍스트 반환
+      return text;
+    }
   };
 
   // 이미지 로딩 실패 시 기본 이미지로 교체하는 함수
@@ -74,7 +106,7 @@ const SearchPage = () => {
       <main className="search-main-content">
         {users.map((user) => (
           <Link
-            to={`/profile/${user.accountname}`}
+            to={`/profile/${encodeURIComponent(user.accountname)}`}
             key={user._id}
             className="user-item"
           >

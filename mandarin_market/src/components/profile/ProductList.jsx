@@ -18,13 +18,11 @@ const ProductList = ({ products = [] }) => {
       <h2 className="product-list-title">판매 중인 상품</h2>
       <div className="product-list-container">
         {products.map((product) => {
-          // 1. 쉼표로 구분된 이미지 문자열에서 첫 번째 이미지만 가져옵니다.
-          const firstImage = product.itemImage
-            ? product.itemImage.split(",")[0].trim()
-            : "";
+          // 불필요한 이미지 처리 로직을 제거합니다.
+          // console.log("이미지 경로 디버깅:", product.itemImage); // 디버깅 후 제거
 
           return (
-            <article key={product.id} className="product-item">
+            <article key={product.id || product._id} className="product-item">
               <a
                 href={product.link}
                 target="_blank"
@@ -33,8 +31,8 @@ const ProductList = ({ products = [] }) => {
               >
                 <div className="product-image-wrapper">
                   <img
-                    // 2. 첫 번째 이미지에 대해서만 URL을 생성합니다.
-                    src={generateImageUrl(firstImage)}
+                    // API에서 받은 이미지 경로를 그대로 전달합니다.
+                    src={generateImageUrl(product.itemImage)}
                     alt={product.itemName}
                     className="product-image"
                     onError={handleImgError}
