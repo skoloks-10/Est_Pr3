@@ -350,14 +350,16 @@
 .album-post-content {
     padding: 16px;
     display: grid;
-    grid-template-columns: repeat(3, 114px); 
-    justify-content: space-between;
-    grid-row-gap: 10px; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 100%;
 }
 
 .album-post-content img {
-    width: 114px;
-    height: 114px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 /* your-profile-followers 페이지 */

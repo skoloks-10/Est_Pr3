@@ -1,0 +1,242 @@
+@import "./reset.css";
+
+/* chat-list페이지 */
+.top-basic-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.top-basic-nav img{
+    width: 24px;
+    height: 24px;
+    margin: 12px 0 12px 16px;
+}
+
+.top-basic-nav .top-nav-vertical{
+    width: 24px;
+    height: 24px;
+    margin: 12px 12px 12px 0;
+}
+
+.tab-menu-nav{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.tab-menu-nav ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tab-menu-nav li {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+}
+
+.tab-menu-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-menu-nav img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.tab-menu-nav p {
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.chat-list-container {
+    width: calc(100% - 32px);
+    height: 42px;
+    align-items: center;
+    margin: 20px 16px;
+    display: flex;
+}
+.chat-list-info{
+    display: flex;
+    flex-direction:column;
+    flex:1;
+    min-width: 0; 
+    margin: 0 12px 0 0;
+}
+
+.chat-list-img-container{
+    position: relative;
+    width: 42px;
+    height: 42px;
+    margin: 0 12px 0 0;
+
+}
+.chat-list-container img{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 12px 0 0;
+
+}
+.chat-list-new{
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.chat-list-name{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: 2px 0 0 0;
+}
+.chat-list-text{
+    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    color:  var(--text-secondary);
+    margin: 4px 13px 3px 0;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-list-day{
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    margin: 26px 0 3px 0;
+    
+}
+
+/* chat-room 페이지 */
+
+.top-chat-nav {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.top-chat-nav img{
+    width: 22px;
+    height: 22px;
+    margin: 12px 10px 12px 16px;
+}
+.top-chat-nav p {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+    text-align: left;
+
+}
+
+.top-chat-nav .top-nav-vertical{
+    width: 24px;
+    height: 24px;
+    margin: 12px 12px 12px 0;
+}
+.chat-room main{
+    background-color: var(--bg-tertiary);
+}
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 16px;
+    min-height: 100%;
+    justify-content: flex-end;
+}
+.user-chat{
+    display: flex;
+}
+.user-chat img{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border-radius: 0.5px solid var(--text-tertiary);
+    object-fit: cover;
+    margin-right: 12px;
+}
+.user-chat-buble{
+    font-size: 14px;
+    font-weight: 400;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--text-muted);
+    border-radius: 0 12px 12px 12px;
+    padding: 12px;
+}
+.user-chat-time,
+.my-chat-time{
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 0 6px;
+    align-self: flex-end;
+}
+
+.my-chat{
+    display: flex;
+    justify-content: flex-end;
+}
+.my-chat-buble{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--bg-primary);
+    background-color: var(--primary-color);
+    border-radius: 12px 0 12px 12px;
+    padding: 12px;
+}
+.my-chat-buble-img img{
+    width: 240px;
+    height: 240px;
+    border-radius: 10px;
+}
+
+.message-footer-input{
+    min-width: 358px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin:12px 16px;
+}
+.message-footer-input img{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-radius: 0.5px solid var(--text-tertiary);
+    object-fit: cover;
+}
+.message-footer-input input{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    border: none;
+    outline: none;
+    flex: 1;
+}
+input::placeholder{
+    color: var(--text-muted);
+}
+
+.message-footer-input button{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: none;
+    margin-left: auto;
+}
