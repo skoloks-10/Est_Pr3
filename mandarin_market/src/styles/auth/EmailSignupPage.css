@@ -51,7 +51,7 @@
 
 .form-group input:focus {
   outline: none;
-  border-bottom: 1px solid #f26e22;
+  border-bottom: 1px solid #0b4d22;
 }
 
 .error-message {
@@ -76,5 +76,5 @@
 }
 
 .auth-button:not(:disabled) {
-  background-color: #f26e22; /* 활성화 색상 */
+  background-color: #0b4d22; /* 활성화 색상 */
 }

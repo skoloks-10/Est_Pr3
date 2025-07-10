@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchHeader from "../components/common/SearchHeader";
 import Footer from "../components/common/Footer";
-import { generateImageUrl } from "../utils/imageUrl"; // 1. imageUrl.js에서 함수를 가져옵니다.
-import defaultImage from "../assets/images/basic-profile.png"; // 2. 기본 이미지를 가져옵니다.
+import defaultImage from "../assets/images/basic-profile.png";
 import "../styles/SearchPage.css";
 
 const SearchPage = () => {
   const [keyword, setKeyword] = useState("");
   const [users, setUsers] = useState([]);
+  const [userImages, setUserImages] = useState({}); // 이미지 URL을 저장할 state
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
@@ -95,6 +95,84 @@ const SearchPage = () => {
     }
   };
 
+  // 이미지 URL에서 파일명 추출 함수
+  const extractFilename = (imageUrl) => {
+    if (!imageUrl || typeof imageUrl !== "string") return null;
+
+    // URL에서 파일명 추출
+    if (imageUrl.includes("https://dev.wenivops.co.kr/services/mandarin/")) {
+      return imageUrl.replace(
+        "https://dev.wenivops.co.kr/services/mandarin/",
+        ""
+      );
+    }
+
+    // 이미 파일명만 있는 경우
+    return imageUrl;
+  };
+
+  // 이미지 로드 함수
+  const loadUserImages = async () => {
+    const token = localStorage.getItem("token");
+    // 기존 userImages를 참조하지 않고 매번 새 객체 생성
+    const newUserImages = {};
+
+    for (const user of users) {
+      // 이전 검사 제거하고 image 존재 여부만 확인
+      if (!user.image) continue;
+
+      try {
+        const filename = extractFilename(user.image);
+        if (!filename) continue;
+
+        console.log(`이미지 요청 URL: /services/mandarin/${filename}`); // 디버깅 로그
+
+        const response = await fetch(`/services/mandarin/${filename}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) throw new Error("이미지 로드 실패");
+        console.log(
+          `이미지 응답 상태: ${response.status}, 타입: ${response.headers.get("Content-Type")}`
+        );
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+
+        console.log(`이미지 URL 생성 성공: ${user._id} -> ${imageUrl}`); // 성공 로그
+        newUserImages[user._id] = imageUrl;
+      } catch (error) {
+        console.error(`사용자 ${user._id} 이미지 로드 실패:`, error);
+        newUserImages[user._id] = defaultImage;
+      }
+    }
+
+    console.log("최종 이미지 URL 상태:", newUserImages); // 최종 상태 확인
+    setUserImages(newUserImages);
+  };
+
+  // users 배열이 업데이트될 때마다 이미지 로드
+  useEffect(() => {
+    if (users.length > 0) {
+      // setUserImages({}) 제거 - loadUserImages에서 새로운 객체 생성
+      loadUserImages();
+    }
+
+    // 컴포넌트 언마운트 시 Blob URL 정리
+    return () => {
+      Object.values(userImages).forEach((url) => {
+        if (url && typeof url === "string" && url.startsWith("blob:")) {
+          URL.revokeObjectURL(url);
+        }
+      });
+    };
+  }, [users]); // userImages는 cleanup 함수에서만 사용되므로 의존성에 추가할 필요 없음
+
+  // userImages 상태 변화 확인용 로그 (디버깅용)
+  useEffect(() => {
+    console.log("userImages 상태 업데이트:", userImages);
+  }, [userImages]);
+
   // 이미지 로딩 실패 시 기본 이미지로 교체하는 함수
   const handleImgError = (e) => {
     e.target.src = defaultImage;
@@ -111,11 +189,11 @@ const SearchPage = () => {
             className="user-item"
           >
             <img
-              // 3. generateImageUrl 함수로 user.image 값을 처리하여 src에 넣습니다.
-              src={generateImageUrl(user.image)}
+              // generateImageUrl 대신 userImages에서 URL 가져오기
+              src={userImages[user._id] || defaultImage}
               alt={`${user.username} 프로필`}
               className="user-profile-img"
-              onError={handleImgError} // 4. 이미지 로딩 실패에 대비합니다.
+              onError={handleImgError}
             />
             <div className="user-info">
               <p className="user-name">

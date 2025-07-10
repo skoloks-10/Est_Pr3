@@ -167,6 +167,14 @@ const ProfilePage = () => {
     fetchProducts();
   }, [decodedAccountname]); // decodedAccountname이 바뀔 때마다 상품 데이터 재요청
 
+  // 게시물 삭제 처리 함수
+  const handlePostDelete = (deletedPostId) => {
+    // 삭제된 게시물을 목록에서 제거
+    setPosts((prevPosts) =>
+      prevPosts.filter((post) => post.id !== deletedPostId)
+    );
+  };
+
   if (isPageLoading)
     return <div className="loading-indicator">프로필을 불러오는 중...</div>;
 
@@ -187,7 +195,11 @@ const ProfilePage = () => {
 
             {/* 게시물 목록 섹션 */}
             <section className="post-section">
-              <PostList posts={posts} />
+              <PostList
+                posts={posts}
+                onPostDelete={handlePostDelete}
+                showViewToggle={true}
+              />
               {isPostsLoading && (
                 <div className="loading-indicator">
                   게시물을 더 불러오는 중...

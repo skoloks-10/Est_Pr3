@@ -11,7 +11,7 @@ import heartIcon from "../../assets/images/icon-heart.png";
 import commentIcon from "../../assets/images/icon-message-circle.png";
 import "../../styles/profile/PostList.css";
 
-const PostList = ({ posts = [], showViewToggle = true }) => {
+const PostList = ({ posts = [], showViewToggle = true, onPostDelete }) => {
   const myAccountname = localStorage.getItem("accountname");
   const [view, setView] = useState("list");
 
@@ -27,28 +27,71 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
 
   // 게시글 삭제 API 호출 (예시)
   const handleDeletePost = async (postId) => {
-    console.log(`${postId} 게시글 삭제 API 호출`);
-    // const token = localStorage.getItem("token");
-    // try {
-    //   const res = await fetch(`https://estapi.mandarin.weniv.co.kr/post/${postId}`, {
-    //     method: "DELETE",
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   });
-    //   const data = await res.json();
-    //   if (data.status !== "200") {
-    //     throw new Error(data.message);
-    //   }
-    //   // TODO: 부모 컴포넌트(ProfilePage)에 삭제 사실을 알려 UI를 업데이트해야 함
-    // } catch (error) {
-    //   console.error("게시글 삭제 실패:", error);
-    // }
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      // 응답 확인
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "게시글 삭제에 실패했습니다.");
+      }
+
+      // 성공 시 UI 업데이트를 위해 부모 컴포넌트에 알림 추가 (prop으로 전달받아야 함)
+      alert("게시글이 삭제되었습니다.");
+
+      // onPostDelete prop이 존재한다면 호출
+      if (typeof onPostDelete === "function") {
+        onPostDelete(postId);
+      }
+    } catch (error) {
+      console.error("게시글 삭제 실패:", error);
+      alert(error.message);
+    }
+
     closeAlert();
   };
 
   // 게시글 신고 API 호출 (예시)
   const handleReportPost = async (postId) => {
-    console.log(`${postId} 게시글 신고 API 호출`);
-    // ... 신고 로직 ...
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch(
+        `https://dev.wenivops.co.kr/services/mandarin/post/${postId}/report`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      // 응답 확인
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "게시글 신고에 실패했습니다.");
+      }
+
+      const data = await res.json();
+      console.log("신고 완료:", data);
+      alert("게시글이 신고되었습니다.");
+    } catch (error) {
+      console.error("게시글 신고 실패:", error);
+      alert(error.message);
+    }
+
     closeAlert();
   };
 
@@ -210,6 +253,7 @@ const PostList = ({ posts = [], showViewToggle = true }) => {
                             <img
                               src={generateImageUrl(post.image)}
                               alt="게시물 이미지"
+                              crossOrigin="anonymous" // 이 속성 추가
                               className="post-image-list"
                             />
                           </Link>

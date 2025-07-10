@@ -10,7 +10,8 @@ import EmailSignupPage from "./pages/EmailSignupPage";
 import ProfileSetupPage from "./pages/ProfileSetupPage";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
-import ChatPage from "./pages/ChatPage";
+import ChatListPage from "./pages/ChatListPage";
+import ChatRoomPage from "./pages/ChatRoomPage";
 import PostUploadPage from "./pages/PostUploadPage";
 import ProfilePage from "./components/profile/ProfilePage";
 import FollowListPage from "./pages/FollowListPage"; // FollowListPage import 추가
@@ -35,7 +36,8 @@ function App() {
           {/* 메인 화면 */}
           <Route path="/home" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/chat" element={<ChatListPage />} />
+          <Route path="/chat/:id" element={<ChatRoomPage />} />
           <Route path="/post/upload" element={<PostUploadPage />} />
           <Route path="/profile/:accountname" element={<ProfilePage />} />
           {/* 팔로워/팔로잉 경로 추가 */}
