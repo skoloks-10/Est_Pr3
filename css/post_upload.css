@@ -1,0 +1,294 @@
+/* post 페이지 */
+.top-basic-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.top-basic-nav img{
+    width: 22px;
+    height: 22px;
+    margin: 12px 0 12px 16px;
+}
+
+.top-basic-nav .top-nav-vertical{
+    width: 24px;
+    height: 24px;
+    margin: 12px 12px 12px 0;
+}
+.home-post-area{
+    border-bottom: 1px solid var(--text-tertiary);
+}
+.home-post{
+    display: flex;
+    margin: 20px 16px;
+    width: calc(100% - 40px);
+    min-width: 358px;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+.home-post-profile {
+    flex-shrink: 0;
+}
+
+.home-post-profile img {
+    width: 42px;
+    height: 42px;
+    margin: 0 12px 0 0; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.home-post-content {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+.profile-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    margin: 4px 0 0 0;
+}
+
+.profile-addr {
+    font-size: 12px;
+    font-weight: 400;
+    color:  var(--text-secondary);
+    margin: 2px 0 0 0;
+}
+
+.home-post-content-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 16px 0;
+}
+.more-vertical{
+    position:absolute;
+    top: 4px;
+    right: 0;
+    width: 18px;
+    height: 18px;
+}
+
+.home-post-content-img{
+    width: 100%;
+    min-width: 304px;
+    min-height: 228px;
+    border-radius: 10px;
+    border-radius: 0.5px solid var(--text-tertiary);
+    margin-bottom: 12px;
+    object-fit: cover;
+    display: block;
+}
+
+.home-post-content-icon {
+    display: flex;
+    margin: 0 0 16px 0;
+}
+
+.home-post-content-icon li {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+}
+
+
+.home-post-content-icon img {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+}
+
+.home-post-content-icon p {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+
+.home-post-content-date {
+    font-size: 10px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: var(--text-secondary);
+}
+
+.post-comment-area{
+    display: flex;
+    flex-direction: column;
+}
+.post-comment{
+    display: flex;
+    margin: 16px;
+    width: calc(100% - 40px);
+    min-width: 358px;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+.post-comment-profile {
+    flex-shrink: 0;
+}
+
+.post-comment-profile img {
+    width: 36px;
+    height: 36px;
+    margin: 0 12px 0 0; 
+    border-radius: 50%;
+    border-radius: 0.5px solid var(--text-tertiary);
+    object-fit: cover;
+}
+.post-comment {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+.post-comment-name-time{
+    display: flex;
+    align-items: center;
+    margin:6px 0 0 0;
+
+}
+
+.post-comment-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+}
+.post-comment-time{
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 2.5px 0 2.5px 6px;
+
+}
+.comment-more-vertical{
+    position:absolute;
+    top: 5px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.post-comment-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    margin: 16px 0 0 0;
+}
+
+.comment-footer-input{
+    min-width: 358px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin:12px 16px;
+}
+.comment-footer-input img{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-radius: 0.5px solid var(--text-tertiary);
+    object-fit: cover;
+}
+.comment-footer-input input{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-primary);
+    border: none;
+    outline: none;
+    flex: 1;
+}
+input::placeholder{
+    color: var(--text-muted);
+}
+
+.comment-footer-input button{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border: none;
+    margin-left: auto;
+}
+
+/* upload 페이지 */
+.top-upload-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.top-upload-nav img{
+    width: 24px;
+    height: 24px;
+    margin: 12px 0 12px 16px;
+}
+
+.MS-button{
+    width: 90px;
+    height: 32px;
+    background-color: var(--primary-light);
+    border-radius: 32px;
+    color: var(--bg-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+.top-upload-nav button{
+    display:block;
+    text-align: center;
+    margin:8px 16px 8px 0;
+    
+}
+.upload-area{
+    width: calc(100% - 32px);
+    display: flex;
+    margin: 20px 16px;
+}
+.upload-profile-img{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border-radius: 1px solid var(--text-tertiary);
+    object-fit: cover;
+    margin-right: 12px;
+}
+
+.upload-area form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.upload-area textarea {
+    height: 770px;
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 12px;
+    color: var(--text-primary);
+    overflow-y: auto;
+    border: none;
+    resize: none;
+}
+.upload-area textarea::placeholder{
+    color: var(--text-muted);
+}
+.upload-area textarea:focus {
+    outline: none;
+}
+.upload-file-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+}
